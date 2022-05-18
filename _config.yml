@@ -1,21 +1,17 @@
 # GitHub adds these metadata via the site.github namespace:
 # https://jekyll.github.io/github-metadata/site.github/
 
-title: Title
-description: >-
-  Multi
-  Line
-  Description
-author: Mike Klimek
-
-version:
-sidebar_home_link:
-sidebar_blog_link:
-
 remote_theme: fongandrew/hydeout
-paginate: 5
 plugins:
   - jekyll-feed
+
+title: Title
+description: Work in progress! 🚧
+author: Mike Klimek
+version:
+sidebar_home_link: true
+sidebar_blog_link:
+paginate: 5
 
 exclude:
   - .sass-cache/

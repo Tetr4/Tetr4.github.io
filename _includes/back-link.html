@@ -1,0 +1,9 @@
+{% comment %}
+  Workaround for https://github.com/fongandrew/hydeout/pull/106
+{% endcomment %}
+{% if page.back_page %}
+    {% assign back_page = site.pages | where: "name", page.back_page | first %}
+    <p class="back-link">
+        <a href="{{ back_page.url | relative_url }}"><span class="back-arrow icon">{% include svg/back-arrow.svg %}</span>{{ back_page.short_title | default: back_page.title }}</a>
+    </p>
+{% endif %}

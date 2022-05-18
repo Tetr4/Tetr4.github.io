@@ -1,5 +1,7 @@
 # Tetr4.github.io
 
+Based on [Hydeout](https://github.com/fongandrew/hydeout)
+
 Setup:
 ```sh
 bundle install
