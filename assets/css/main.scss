@@ -1,0 +1,11 @@
+---
+---
+
+$primary-color: #2d003e;
+
+// See https://github.com/fongandrew/hydeout/blob/master/_sass/hydeout/_variables.scss
+$sidebar-bg-color: $primary-color;
+$link-color: $primary-color;
+$sidebar-sticky: true;
+
+@import "hydeout";

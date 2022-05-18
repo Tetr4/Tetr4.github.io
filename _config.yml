@@ -1,12 +1,16 @@
-# accessed via {{ site.title }}, {{ site.email }}, and so on.
+# GitHub adds these metadata via the site.github namespace:
+# https://jekyll.github.io/github-metadata/site.github/
+
 title: Title
 description: >-
   Multi
   Line
   Description
-domain: tetr4.github.io
-url: https://tetr4.github.io
-baseurl: / # subpath, e.g. /blog
+author: Mike Klimek
+
+version:
+sidebar_home_link:
+sidebar_blog_link:
 
 remote_theme: fongandrew/hydeout
 paginate: 5
