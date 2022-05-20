@@ -1,11 +1,17 @@
 ---
 ---
 
-$primary-color: #2d003e;
+// global colors
+$primary-color: #422594;
+$primary-color-variant: #8e83f7;
+$secondary-color: #946b25;
 
-// See https://github.com/fongandrew/hydeout/blob/master/_sass/hydeout/_variables.scss
+// Hydeout theme, see https://github.com/fongandrew/hydeout/blob/master/_sass/hydeout/_variables.scss
 $sidebar-bg-color: $primary-color;
 $link-color: $primary-color;
-$sidebar-sticky: true;
-
+$code-color: $secondary-color;
 @import "hydeout";
+
+// wave
+$wave-bg-sky: $primary-color-variant;
+@import "wave";

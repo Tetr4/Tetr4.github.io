@@ -1,0 +1,68 @@
+// fiddle with these to control the wave's look
+$wave-bg-sky: white !default;
+$wave-curvature: 4 !default;
+$wave-visible-portion: 7% !default;
+$wave-overlap: 2% !default;
+$wave-magnitude-top: 2% !default;
+$wave-magnitude-bottom: 4% !default;
+$wave-animation-duration: 20s !default;
+
+// calculations
+$wave-size: 100% * $wave-curvature;
+$wave-left: -($wave-size/2 - 50%); // center within sidebar
+$wave-margin-top: -$wave-size + $wave-visible-portion; // overlap top of sidebar
+
+// replace background from theme (which actually uses body for the sidebar background)
+body {
+  background-color: $wave-bg-sky;
+  background-image: none;
+}
+
+#sidebar {
+  background-color: $sidebar-bg-color;
+  background-image: linear-gradient(to bottom, lighten($sidebar-bg-color, 15%), darken($sidebar-bg-color, 15%));
+}
+
+// add two large rotating uneven spheres to the non mobile sidebar (based on https://codepen.io/raykuo/pen/QgaKrr)
+@media (min-width: $large-breakpoint) {
+
+  #sidebar {
+    padding-top: $section-spacing * 2; // overwrite theme so we have more space for the wave
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      width: $wave-size;
+      aspect-ratio: 1;
+      top: 0;
+      left: $wave-left;
+      background-color: $wave-bg-sky;
+      animation-name: rotate;
+      animation-duration: $wave-animation-duration;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    &:before {
+      margin-top: $wave-margin-top;
+      border-radius: 50% - $wave-magnitude-top;
+    }
+
+    &:after {
+      margin-top: $wave-margin-top + $wave-overlap;
+      border-radius: 50% - $wave-magnitude-bottom;
+      opacity: .5;
+    }
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotateZ(0deg);
+    }
+
+    to {
+      transform: rotateZ(360deg);
+    }
+  }
+}

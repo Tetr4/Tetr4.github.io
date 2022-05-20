@@ -6,7 +6,7 @@ plugins:
   - jekyll-feed
 
 title: Title
-description: Work in progress! 🚧
+description: Work in progress!
 author: Mike Klimek
 version:
 sidebar_home_link: true
