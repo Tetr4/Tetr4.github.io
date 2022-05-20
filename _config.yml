@@ -5,8 +5,8 @@ remote_theme: fongandrew/hydeout
 plugins:
   - jekyll-feed
 
-title: Title
-description: Work in progress!
+title: Mike Klimek
+description: Welcome to my blog about development and tech.
 author: Mike Klimek
 version:
 sidebar_home_link: true
