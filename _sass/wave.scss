@@ -12,22 +12,23 @@ $wave-size: 100% * $wave-curvature;
 $wave-left: -($wave-size/2 - 50%); // center within sidebar
 $wave-margin-top: -$wave-size + $wave-visible-portion; // overlap top of sidebar
 
-// replace background from theme (which actually uses body for the sidebar background)
-body {
-  background-color: $wave-bg-sky;
-  background-image: none;
-}
-
-#sidebar {
-  background-color: $sidebar-bg-color;
-  background-image: linear-gradient(to bottom, lighten($sidebar-bg-color, 15%), darken($sidebar-bg-color, 15%));
-}
-
-// add two large rotating uneven spheres to the non mobile sidebar (based on https://codepen.io/raykuo/pen/QgaKrr)
+// only affects non mobile sidebar
 @media (min-width: $large-breakpoint) {
+  
+  // replace background from theme (which actually uses body for the sidebar background)
+  body {
+    background-color: $wave-bg-sky;
+    background-image: none;
+  }
 
   #sidebar {
-    padding-top: $section-spacing * 2; // overwrite theme so we have more space for the wave
+    background-color: $sidebar-bg-color;
+    background-image: linear-gradient(to bottom, lighten($sidebar-bg-color, 15%), darken($sidebar-bg-color, 15%));
+  }
+
+  // add two large rotating uneven spheres to top of sidebar (based on https://codepen.io/raykuo/pen/QgaKrr)
+  #sidebar {
+    padding-top: $section-spacing * 2.5; // overwrite theme so we have more space for the wave
 
     &:before,
     &:after {
@@ -55,14 +56,14 @@ body {
       opacity: .5;
     }
   }
+}
 
-  @keyframes rotate {
-    from {
-      transform: rotateZ(0deg);
-    }
+@keyframes rotate {
+  from {
+    transform: rotateZ(0deg);
+  }
 
-    to {
-      transform: rotateZ(360deg);
-    }
+  to {
+    transform: rotateZ(360deg);
   }
 }
