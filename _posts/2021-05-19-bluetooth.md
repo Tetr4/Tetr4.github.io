@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Bluetooth
-categories: Android
+categories:
+    - Android
 description: A comprehensive guide to Bluetooth LE and Classic on Android.
 ---
 
