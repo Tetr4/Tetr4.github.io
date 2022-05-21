@@ -12,6 +12,7 @@ $link-color: $primary-color;
 $code-color: $secondary-color;
 @import "hydeout";
 @import "smaller-sidebar-title";
+@import "fix-message-margin";
 
 // wave animation in sidebar
 $wave-bg-sky: $primary-color-variant;
