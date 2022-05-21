@@ -1,0 +1,13 @@
+details {
+  background-color: #f9f9f9; // same color as .message
+  margin-bottom: 1rem;
+  padding: 1rem;
+
+  summary {
+    cursor: pointer;
+  }
+
+  :nth-child(2) {
+    margin-top: 1rem;
+  }
+}

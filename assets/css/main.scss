@@ -13,6 +13,9 @@ $code-color: $secondary-color;
 @import "hydeout";
 @import "smaller-sidebar-title";
 
-// wave
+// wave animation in sidebar
 $wave-bg-sky: $primary-color-variant;
 @import "wave";
+
+// expandable <details>
+@import "details";
