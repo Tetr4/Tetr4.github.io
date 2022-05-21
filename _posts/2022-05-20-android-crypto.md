@@ -1,7 +1,8 @@
 ---
 layout: post
-title:  "Cryptography"
+title:  Cryptography & Biometrics
 categories: Android
+description: Learn how to securely encrypt data using the Android key store.
 ---
 
 Implementing cryptographic operations in Android without a library can be quite confusing, because the API is based on the ancient [Java Cryptography Architecture](https://docs.oracle.com/javase/8/docs/technotes/guides/security/crypto/CryptoSpec.html), which was introduced with JDK 1.1. However from a high-level point of view, encrypting and decrypting data in Android is relatively straight forward.
@@ -11,7 +12,7 @@ Links: [Official Documentation](https://developer.android.com/guide/topics/secur
 
 # Workflow
 Encryption:
-1. Obtain a `SecretKey`
+1. Obtain a `SecretKey`:
     - Either create a new key in the Android `KeyStore`
     - Or get a key that you created previously from Android `KeyStore`
 2. Create a `Cipher` and initialize it with the `SecretKey`
@@ -20,17 +21,18 @@ Encryption:
 
 Decryption:
 1. Get a `SecretKey` that you created previously from Android `KeyStore`
-2. Create a `Cipher` and initialize it with the `SecretKey`.
-3. Optional: Depend on the used transformation, you will also need to provide the previously stored initialization vector to the `Cipher`
+2. Create a `Cipher` and initialize it with the `SecretKey`
+3. Optional: Depend on the used transformation, you will also need to provide the previously stored initialization vector to the `Cipher`.
 4. Decrypt data with the `Cipher`
 
 
 # Choosing a transformation
-A “transformation” describes the cryptographic operations that should be use. Its format looks like this: `"$ALGORITHM/$BLOCK_MODE/$PADDING"`. Google recommends [AES/GCM/NoPadding with 256-bit keys](https://developer.android.com/guide/topics/security/cryptography#choose-algorithm).
+A “transformation” describes the cryptographic operations that should be used. Its format looks like this: `"$ALGORITHM/$BLOCK_MODE/$PADDING"`. Google recommends [AES/GCM/NoPadding with 256-bit keys](https://developer.android.com/guide/topics/security/cryptography#choose-algorithm).
 
 
 <details markdown="1">
 <summary>Algorithm</summary>
+
 - [AES](https://de.wikipedia.org/wiki/Advanced_Encryption_Standard) is an industry standard and is available on all Android versions. 
 - [DES](https://en.wikipedia.org/wiki/Data_Encryption_Standard) is the predecessor of AES.
 - [RSA](https://en.wikipedia.org/wiki/RSA_(cryptosystem)) is used for asymmetric (public / private key) cryptography.
@@ -38,6 +40,7 @@ A “transformation” describes the cryptographic operations that should be use
 
 <details markdown="1">
 <summary>Block mode</summary>
+
 The algorithms encrypt data in blocks of fixed length, e.g. AES only encrypts 128 bit blocks. If the data to be encrypted is longer, multiple blocks have to be chained. This is handled by the [block mode](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation) (ECB, CBC, CTR, GCM). 
 
 Never use ECB, as as it forms [patterns](https://words.filippo.io/the-ecb-penguin/). 
@@ -63,16 +66,16 @@ There are two ways to generate keys:
 - Generate one yourself and put it in the `KeyStore`
 - Let the key store generate one via `KeyGenParameterSpec`
 
-Letting the Android key store handle key generation is the most secure, as the actual key never leaves the  [trusted enviroment](https://source.android.com/security/trusty). Example (`AES/GCM/NoPadding`):
+Letting the Android key store handle key generation is most secure, as the actual key never leaves the [trusted enviroment](https://source.android.com/security/trusty). Example (`AES/GCM/NoPadding`):
 ```kotlin
 private fun generateKey(keyAlias: String) {
     val spec = KeyGenParameterSpec.Builder(keyAlias, PURPOSE_ENCRYPT or PURPOSE_DECRYPT)
         .setKeySize(256)
-        .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
-        .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
+        .setBlockModes(BLOCK_MODE_GCM)
+        .setEncryptionPaddings(ENCRYPTION_PADDING_NONE)
         .build()
     // use "AndroidKeyStore" as a security provider, so key is directly saved in key store
-    val keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore")
+    val keyGenerator = KeyGenerator.getInstance(KEY_ALGORITHM_AES, "AndroidKeyStore")
     keyGenerator.init(spec)
     keyGenerator.generateKey()
 }
@@ -90,7 +93,7 @@ private fun getKey(keyAlias: String): Key {
 ```kotlin
 fun encrypt(plainBytes: ByteArray, secretKey: Key): Pair<ByteArray, ByteArray> {
     val cipher = Cipher.getInstance("$ALGORITHM/$BLOCK_MODE/$PADDING") 
-    cipher.init(Cipher.ENCRYPT_MODE, secretKey) 
+    cipher.init(ENCRYPT_MODE, secretKey)
     val encryptedBytes: ByteArray = cipher.doFinal(plainBytes)
     return Pair(cipher.iv, encryptedBytes)
 }
@@ -98,10 +101,10 @@ fun encrypt(plainBytes: ByteArray, secretKey: Key): Pair<ByteArray, ByteArray> {
 fun decrypt(encryptedBytes: ByteArray, iv: ByteArray, secretKey: Key): ByteArray {
     val cipher = Cipher.getInstance("$ALGORITHM/$BLOCK_MODE/$PADDING")
     val spec: AlgorithmParameterSpec = when (BLOCK_MODE) {
-        KeyProperties.BLOCK_MODE_GCM -> GCMParameterSpec(GCM_TAG_SIZE, iv)
+        BLOCK_MODE_GCM -> GCMParameterSpec(GCM_TAG_SIZE, iv)
         else -> IvParameterSpec(iv)
     }
-    cipher.init(Cipher.ENCRYPT_MODE, secretKey, spec) 
+    cipher.init(DECRYPT_MODE, secretKey, spec)
     return cipher.doFinal(bytes)
 } 
 ```
@@ -130,7 +133,7 @@ private fun String.decodeFromBase64(): ByteArray = Base64.decode(this, Base64.DE
 # Biometric auth
 You can show a biometric authentication dialog with the [androidx biometric library](https://developer.android.com/training/sign-in/biometric-auth). You can use this as a simple dialog with a success and error callback. It supports multiple authentication strengths (i.e. fingerprints, face unlock, swipe pattern, unlock PIN, etc.), depending on Android API level.
 
-However you can also use it to protect a `SecretKey`, so user authentication is required before the key can be used for encrypting or decrypting. When using the biometric prompt like this, you can only use `BIOMETRIC_STRONG` authentication, so a fallback non-biometric credentials (PIN) is not allowed and it will not work on older devices.
+However you can also use it to protect a `SecretKey`, so user authentication is required before the key can be used for encrypting or decrypting. When using the biometric prompt like this, you can only use `BIOMETRIC_STRONG` authentication, so a fallback to non-biometric credentials (PIN) is not allowed and it will not work on older devices.
 
 To use it like this there are multiple steps to complete:
 1. Check that authentication is possible (user has fingerprints enrolled) with `biometricManager.canAuthenticate(BIOMETRIC_STRONG)`
@@ -138,7 +141,9 @@ To use it like this there are multiple steps to complete:
 3. Create `Cipher` that is initialized with the `SecretKey` (and IV for decryption) and pass it to `biometricPrompt.authenticate(info, CryptoObject(cipher))` 
 4. In the `onAuthenticationSucceeded` callback, get the Cipher from the `AuthenticationResult`. It can now be used for encryption / decryption.
 
+
 <div class="message" markdown="1">
+
 If you want to require authentication only for decryption (e.g. to allow storing encrypted tokens after token refresh without user intervention) you can create a secret key yourself (call `KeyGenerator.getInstance(ALGORITHM).generateKey()`) and add the key to the key store under two alias with different `KeyProtection`:
 - One alias only for encryption, which does not require authentication
 - One alias only for decryption, which requires authentication
@@ -146,11 +151,15 @@ If you want to require authentication only for decryption (e.g. to allow storing
 Link: [How do I require user authentication only for decryption but not encryption](https://stackoverflow.com/questions/56564833/how-do-i-require-user-authentication-only-for-decryption-but-not-encryption/57634763#57634763)
 </div>
 
+
 <div class="message" markdown="1">
+
 **NOTE:** Keys can not be exported and will be removed, when the app is uninstalled. They are not part of `android:allowBackup`.
 </div>
 
+
 <div class="message" markdown="1">
+
 **NOTE:** If a user makes changes to the biometric settings (i.e. removes all fingerprints in system settings) the secret key will be invalidated by default. It will not be removed from the key store, but it will throw an exception, when trying to encrypt/decrypt it. In that case the only option is to remove it and create a new key.
 </div>
 
