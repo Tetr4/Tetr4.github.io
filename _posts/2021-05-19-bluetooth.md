@@ -188,7 +188,7 @@ Some Bluetooth LE devices support [Google Fast Pair](https://developers.google.c
 
 ![Fast Pair Notification](https://developers.google.com/nearby/fast-pair/images/initial-pairing.png)
 
-After pairing, Fast Pair may suggest installing the companion app, if the app id is correctly configured in the device’s [Google Nearby](https://developers.google.com/nearby) console.
+After pairing, Fast Pair may suggest installing the companion app, if the app id is correctly configured in the device's [Google Nearby](https://developers.google.com/nearby) console.
 
 <div class="message" markdown="1">
 
@@ -204,9 +204,9 @@ Some devices support both BLE and Bluetooth Classic and appear as two devices (w
 However it is only available on API ≥ 26 and is very limited, as its [use case](https://www.youtube.com/watch?v=F1mvm_bfNgU) seems to be very specific to smart watches and background connectivity. The dialog is only shown as soon as at least one matching device is found, so if no device is in range, no dialog is shown. It does not support continuous scanning, which makes it unusable for onboarding flows where a device is not always discoverable, i.e. if the user has to put in pairing mode first. To retry a scan, the dialog has to be closed and opened again by the user.
 
 ## Unstable service record UUIDs
-A Bluetooth Classic device’s supported service record UUIDs can be accessed with [BluetoothDevice.getUuids](https://developer.android.com/reference/kotlin/android/bluetooth/BluetoothDevice#getuuids). This is a cache which is created during pairing. 
+A Bluetooth Classic device's supported service record UUIDs can be accessed with [BluetoothDevice.getUuids](https://developer.android.com/reference/kotlin/android/bluetooth/BluetoothDevice#getuuids). This is a cache which is created during pairing.
 
-In very rare cases some devices have unstable service record UUIDs (e.g. UUID depends on firmware version). In that case, the cache can can be refreshed by calling [BluetoothDevice.fetchUuidsWithSdp](https://developer.android.com/reference/kotlin/android/bluetooth/BluetoothDevice#fetchUuidsWithSdp()) and waiting for the result in a `ACTION_UUID` broadcast receiver. Fetching UUIDs takes up to 5 seconds, so don’t do this for every connection attempt, just as a fallback for devices with unstable service records.
+In very rare cases some devices have unstable service record UUIDs (e.g. UUID depends on firmware version). In that case, the cache can can be refreshed by calling [BluetoothDevice.fetchUuidsWithSdp](https://developer.android.com/reference/kotlin/android/bluetooth/BluetoothDevice#fetchUuidsWithSdp()) and waiting for the result in a `ACTION_UUID` broadcast receiver. Fetching UUIDs takes up to 5 seconds, so don't do this for every connection attempt, just as a fallback for devices with unstable service records.
 
 ## Randomized MAC addresses
 Most Bluetooth 4.2 devices use a periodically changing randomized MAC address during scanning. This is a [privacy feature](https://www.bluetooth.com/blog/bluetooth-technology-protecting-your-privacy/) to prevent tracking. So a MAC address ([BluetoothDevice.getAddress](https://developer.android.com/reference/kotlin/android/bluetooth/BluetoothDevice#getaddress)) from a scanned device should not be used to identify a device.
@@ -216,8 +216,8 @@ However once paired, the MAC address is stable and can be persisted, e.g. to rem
 ## Bluetooth on iOS
 The iOS Bluetooth API is functionally very different to Android, which leads to different UX in onboarding and connection flows:
 - Both have different preconditions and permission models for scanning and connecting.
-- iOS can’t access the list of bonded devices or know if a device is not paired anymore.
-- iOS can’t pair manually. Pairing is always done by reading from a protected characteristic.
+- iOS can't access the list of bonded devices or know if a device is not paired anymore.
+- iOS can't pair manually. Pairing is always done by reading from a protected characteristic.
 - Bluetooth Classic requires a special [MFI](https://mfi.apple.com/) chip on the Bluetooth device and MFI certification of both app and device.
 
 
