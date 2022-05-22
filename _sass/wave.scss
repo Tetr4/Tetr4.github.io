@@ -22,6 +22,7 @@ $wave-margin-top: -$wave-size + $wave-visible-portion; // overlap top of sidebar
   }
 
   #sidebar {
+    overflow: hidden;
     background-color: $sidebar-bg-color;
     background-image: linear-gradient(to bottom, lighten($sidebar-bg-color, 15%), darken($sidebar-bg-color, 15%));
   }
