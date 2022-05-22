@@ -10,7 +10,7 @@ These principles are not strict rules and open to interpretation. There is no co
 
 
 <details markdown="1">
-<summary>Keep It Simple Stupid (KISS)</summary>
+<summary>Keep It Simple and Stupid (KISS)</summary>
 
 - Less is more. If something is complex it will likely break. So complete a feature with minimum amount of necessary code, that is still perfectly understandable. Try to find the "cleanest" solution.
 - Development flow: Make it work, then iteratively refactor to make it more simple/readable. Maybe there is a function in the standard library you can use instead, or you can simplify a layout, or some duplicate code can be extracted. Before submitting a merge request, check if you can simplify your changes even further.
@@ -43,7 +43,7 @@ Loose coupling makes it easier to create a mental model and follow the flow of t
 
 
 <details markdown="1">
-<summary>Principle of least Surpose (POLS)</summary>
+<summary>Principle of least Surprise (POLS)</summary>
 
 - A unit's (methods, class) name is a mental abstraction for its functionality. So reading the name (or signature) should be enough information to use it, without unexpected behavior. When encountering unexpected behavior, we have to look at the implementation details, which consumes time and reduces our trust in the code. Good code looks **boring** as it contains no such surprises.
 - If something is not obvious (["black magic"](https://en.wikipedia.org/wiki/Magic_(programming)), workarounds, bugs in frameworks, deviation from best practices, etc.) or may lead to issues in the future, mark it as a place that needs special attention. E.g. by adding a comment or pulling it into a separate function, where the method names describes the behavior. This prevents surprises, communication overhead and regression, when other developers touch this piece of code.
