@@ -2,7 +2,7 @@
 layout: post
 title: Design Principles
 categories:
-    - Clean Code
+    - Software Design
 description: A concise overview of software design principles.
 ---
 

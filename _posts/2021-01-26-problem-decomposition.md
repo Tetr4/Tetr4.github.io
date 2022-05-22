@@ -2,7 +2,7 @@
 layout: post
 title: Problem Decomposition
 categories:
-    - Clean Code
+    - Software Design
 description: Problem decomposition will allow you to takle any problem.
 ---
 
