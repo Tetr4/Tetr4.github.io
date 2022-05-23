@@ -6,7 +6,7 @@ categories:
 description: A concise overview of software design principles.
 ---
 
-These principles are not strict rules and open to interpretation. There is no correct way to write clean code, as it requires a lot of creativity, but you can use these principles as inspiration:
+These principles are open to interpretation and not strict rules to blindly follow. There is no correct way to write clean code, as it requires a lot of creativity, but you can use these principles as inspiration:
 
 
 <details markdown="1">
