@@ -22,7 +22,6 @@ $wave-margin-top: -$wave-size + $wave-visible-portion; // overlap top of sidebar
   }
 
   #sidebar {
-    overflow: hidden;
     background-color: $sidebar-bg-color;
     background-image: linear-gradient(to bottom, lighten($sidebar-bg-color, 15%), darken($sidebar-bg-color, 15%));
   }
@@ -30,6 +29,7 @@ $wave-margin-top: -$wave-size + $wave-visible-portion; // overlap top of sidebar
   // add two large rotating uneven spheres to top of sidebar (based on https://codepen.io/raykuo/pen/QgaKrr)
   #sidebar {
     padding-top: $section-spacing * 2.5; // overwrite theme so we have more space for the wave
+    overflow: hidden; // spheres are wider than sidebar but should not allow scrolling
 
     &:before,
     &:after {
