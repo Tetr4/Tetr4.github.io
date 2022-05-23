@@ -44,6 +44,10 @@ $wave-margin-top: -$wave-size + $wave-visible-portion; // overlap top of sidebar
       animation-duration: $wave-animation-duration;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
+
+      @media (prefers-reduced-motion: reduce) {
+        animation-play-state: paused;
+      }
     }
 
     &:before {
