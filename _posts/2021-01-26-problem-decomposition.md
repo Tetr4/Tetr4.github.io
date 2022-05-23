@@ -3,7 +3,7 @@ layout: post
 title: Problem Decomposition
 categories:
     - Software Design
-description: Problem decomposition will allow you to takle any problem.
+description: Problem decomposition will allow you to tackle any problem.
 ---
 
 Software design is all about [problem decomposition](https://en.wikipedia.org/wiki/Decomposition_(computer_science)). Take a large problem, break it up into smaller more managable problems, and you can solve each one individually. This allows you to iteratively solve every problem, no matter how large, in small steps.

@@ -3,7 +3,7 @@ layout: post
 title: Bluetooth
 categories:
     - Android
-description: A comprehensive guide to Bluetooth LE and Classic on Android.
+description: A comprehensive guide to Bluetooth on Android.
 ---
 
 Developing Bluetooth apps can be tricky, to put it mildly. This guide is based on my experience working on Bluetooth (LE and Classic) companion apps for devices like headsets, scooters, cars and smartwatches.
