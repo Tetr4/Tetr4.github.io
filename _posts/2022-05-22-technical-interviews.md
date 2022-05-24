@@ -11,7 +11,7 @@ Technical interviews have become kind of a meme on the developer community. Espe
 # What makes a good candidate?
 A good candidate is not just someone who can code or solve algorithm puzzles. You're looking for someone who can apply these skills and **produce value** (directly or indirectly). For example by raising productivity and quality, satisfying customers, bringing in new knowledge, or generally making work pleasant for the team.
 
-So you are looking for self motivated **problem solvers**, not [code monkeys](https://en.wikipedia.org/wiki/Code_monkey). Someone who will says "no" if there are better suited alternative solutions, that will save time and money.
+So you are looking for self motivated **problem solvers**, not [code monkeys](https://en.wikipedia.org/wiki/Code_monkey). Someone who can say "no" if there are better suited alternative solutions, that will save time and money.
 
 At the end of your interview, you should be able to assess these points about a candidate:
 - **Skills**: Do they already have the necessary experience to become productive? Better yet: Are they able to quickly acquire new skills and fill gaps? Missing skills is not a problem, if a candidate has high potential and is a quick learner.
