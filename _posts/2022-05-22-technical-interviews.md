@@ -6,7 +6,7 @@ categories:
 description: Tips for conducting technical interviews.
 ---
 
-Technical interviews have become kind of a meme on the developer community. Especially with Big Tech companies' extensive focus on niche algorithms and datastructures whiteboard tests, that have no relevance for most developer jobs, but are still copied by non tech companies. This post contains some tips for conducting technical interviews as a developer.
+Technical interviews have become kind of a meme in the developer community. Especially with Big Tech companies' extensive focus on niche algorithms and datastructures whiteboard tests, that have no relevance for most developer jobs, but are still copied by non tech companies. This post contains some tips for conducting technical interviews as a developer.
 
 # What makes a good candidate?
 A good candidate is not just someone who can code or solve algorithm puzzles. You're looking for someone who can apply these skills and **produce value** (directly or indirectly). For example by raising productivity and quality, satisfying customers, bringing in new knowledge, or generally making work pleasant for the team.
