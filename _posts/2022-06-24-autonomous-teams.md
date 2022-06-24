@@ -38,7 +38,7 @@ First I strongly recommend reading this blog post by Gergely Orosz: [What Silico
 
 
 # How to do it right
-In my opinion these traditional companies really need small **autonomous product teams** with a **shared vision** and strong **technical leads**. Or with more buzzwords: Self-organized cross-functional teams and flat hierarchies.
+In my opinion these traditional companies really need small **autonomous product teams** with a **shared vision** and strong **technical leads**. Or with more buzzwords: Self-organized cross-functional agile teams and flat hierarchies.
 
 This actually uses the teams' full potential:
 - Product teams know the product they are developing inside out, can estimate costs (e.g. complexity) and see benefits (via business metrics). With this they can find better suited creative solutions to business problems, that minimize cost and maximize benefit.
