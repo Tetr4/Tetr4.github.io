@@ -127,7 +127,7 @@ Loose coupling makes it easier to create a mental model and follow the flow of t
 <summary>Graceful Degradation</summary>
 
 - There are two kinds of errors:
-    - If an error would inevitably leave your program in an illegal or broken state that would cause other issue (e.g. data corruption), then it is **fatal** and should crash the program.
+    - If an error would inevitably leave your program in an illegal or broken state that would cause other issues (e.g. data corruption), then it is **fatal** and should crash the program.
     - If you can recover from the error, so your program always remains in a valid state, then it is an **exception** and you should handle it. E.g. you could show a message to your users and let them try again after a failed backend request. Your program's state must always stay valid, e.g. when using optimistic request (showing result before a request is finished), then the previous state (before result was shown) must be restored.
 - **Never silently suppress exceptions** (empty catch block). Swallowed exceptions make it very hard to find the source of bugs and may introduce bugs that could easily be discovered early during development. Instead at least log it and/or pass it to the user as a generic error (in a server return status 500). In rare cases where a specific type of exception is expected and can safely be ignored, add a comment, so it is clear why there is no logging.
 </details>
