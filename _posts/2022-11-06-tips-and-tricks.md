@@ -6,6 +6,8 @@ categories:
 description: Short and sweet tips, tricks and best practices for Android development.
 ---
 
+Some short and sweet tips, tricks and best practices for Android development:
+
 <details markdown="1">
 <summary>Using the Command Line</summary>
 
