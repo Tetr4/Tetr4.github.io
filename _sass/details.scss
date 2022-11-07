@@ -10,4 +10,10 @@ details {
   :nth-child(2) {
     margin-top: 1rem;
   }
+
+  .highlight {
+    // nested code block within a <details/> element has the same background, so we don't need extra vertical padding
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+  }
 }
