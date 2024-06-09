@@ -90,11 +90,11 @@ You can use `keytool` for creating a keystore and adding signing keys to it. It 
 
 ```sh
 # Create keystore or add key to existing keystore
-keytool -v -genkey -keystore ./keystore.jks -keyalg RSA -keysize 2048 -validity $((365 * 50)) -alias mykey
+keytool -v -genkey -keystore ./keystore.jks -keyalg RSA -keysize 2048 -validity $((365 * 50)) -alias MyKey
 # List keys in keystore
 keytool -v -list -keystore ./keystore.jks
 # Move key from one keystore to another (creates other if it does not exist)
-keytool -v -importkeystore -srckeystore ./keystore.jks -destkeystore ./new_keystore.jsk --alias mykey
+keytool -v -importkeystore -srckeystore keystore.jks -destkeystore new_keystore.jks -srcalias MyKey -destalias MyKey
 ```
 </details>
 
