@@ -66,7 +66,7 @@ Examples:
 **Note:** This is extremely simplified but helps to understand embeddings and finetuning.
 </div>
 
-The knowledge contained in LLMs is stored in the form of mathematical "feature vectors". Each value of a vector describes a **semantic meaning** (feature) of a word (token), e.g., whether the word is more male or female. 
+The knowledge contained in LLMs is stored in the form of mathematical "feature vectors". Each value of a vector describes a **semantic meaning** (feature) of a word (token), e.g. whether the word is more male or female. 
 
 If you plot these feature vectors in a multidimensional **vector space**, related words would be close to each other.
 
@@ -81,7 +81,7 @@ If you plot these feature vectors in a multidimensional **vector space**, relate
 <details markdown="1">
 <summary>Embeddings</summary>
 
-With embeddings you can enrich a model with knowledge from documents (e.g., PDFs, videos, websites, …). Feature vectors are generated from these documents and stored in a separate **vector database**.
+With embeddings you can enrich a model with knowledge from documents (e.g. PDFs, videos, websites, …). Feature vectors are generated from these documents and stored in a separate **vector database**.
 
 Generating vectors **takes a while**, so it is done once instead of with each user request. Embeddings need to be regenerated if the documents change, so embeddings are **not real-time capable** (e.g. data that changes regularily).
 
