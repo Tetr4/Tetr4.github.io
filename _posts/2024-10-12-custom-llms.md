@@ -19,13 +19,13 @@ Training a completely new **base model** is **extremely expensive** (GPT-4: $100
 - OpenAI: [GPT](https://platform.openai.com/docs/models/overview) (API only)
 - Anthropic: [Claude](https://www.anthropic.com/claude) (API only)
 - Mistral AI: [Mistral](https://huggingface.co/docs/transformers/main/en/model_doc/mistral) (public)
-- (Many small models and remixes of larger models)
+- (Many other models and remixes of larger models)
 
 These models are trained on [billions of web pages](https://commoncrawl.org/), e.g. wikis, open source projects, etc.
 
 These models often have different **variants**:
 - Different sizes (e.g. 2B, 70B or 405B parameters). Larger models are [more powerful](https://lmarena.ai/?leaderboard), but require more resources.
-- Instruct models (optimized for chatbots)
+- Fine tunings (e.g. "instruct models" optimized for chatbots)
 - Multimodal models (understand images or speech)
 
 Models have different **hardware requirements**: 
@@ -55,20 +55,20 @@ System prompts are predefined instructions given to an LLM in addition to user's
 Examples:
 - **Role**: "You are a helpful assistant."
 - **Behavior**: "Answer in English and provide detailed explanations."
-- **Context**: "The time is {time} and the user's name is {name}."
+- **Context**: "The time is {time} and the user's name is {name}. Here is a document relevant to the user's query: {document}"
 </details>
 
 
 <details markdown="1">
-<summary>Feature Vectors</summary>
+<summary>Vector Databases</summary>
 
-<div class="message" markdown="1">
-**Note:** This is extremely simplified but helps to understand embeddings and finetuning.
-</div>
+Data can be stored in vector databases via mathematical "feature vectors". A collection of vectors is called an **embedding**.
 
-The knowledge contained in LLMs is stored in the form of mathematical "feature vectors". Each value of a vector describes a **semantic meaning** (feature) of a word (token), e.g. whether the word is more male or female. 
+These vectors lie in a multidimensional **vector space** (often plotted as a point cloud). Each dimension describes a **semantic meaning** (feature) of a data element. This has the advantage that related pieces of data are close to each other in the vector space.
 
-If you plot these feature vectors in a multidimensional **vector space**, related words would be close to each other.
+**Semantic search**: A search query is converted to a feature vector and neighbors of this vector (related data) are retrieved.
+
+**Embedding Models**: Text is converted to feature vectors with specialized embedding models, e.g. [nomic-embed-text](https://ollama.com/library/nomic-embed-text).
 
 ![](https://ds055uzetaobb.cloudfront.net/brioche/uploads/JERsKXkW4T-screen-shot-2016-05-05-at-123118-pm.png?width=2400)
 *Source: Gutierrez-Osuna, R. Introduction to Pattern Analysis*
@@ -79,11 +79,11 @@ If you plot these feature vectors in a multidimensional **vector space**, relate
 
 
 <details markdown="1">
-<summary>Embeddings</summary>
+<summary>Retrieval Augment Generation</summary>
 
-With embeddings you can enrich a model with knowledge from documents (e.g. PDFs, videos, websites, …). Feature vectors are generated from these documents and stored in a separate **vector database**.
+Retrival augmented generation (RAG) is used to enrich a model with knowledge from documents (e.g. PDFs, videos, websites, …). 
 
-Generating vectors **takes a while**, so it is done once instead of with each user request. Embeddings need to be regenerated if the documents change, so embeddings are **not real-time capable** (e.g. data that changes regularily).
+These documents are split into chunks that are stored in a **vector database** as **embeddings**. Embeddings need to be regenerated if the documents change, so embeddings are **not real-time capable**.
 
 A user request proceeds as follows:
 - The request is converted into a vector in the embedding's vector space.
@@ -94,25 +94,17 @@ A user request proceeds as follows:
 
 
 <details markdown="1">
-<summary>Fine Tuning</summary>
-
-Fine-tuning adjusts the **general behavior** of an existing model through **further training**. For example to use it as a chatbot (question/answer), as a code generator, to write books, or to use certain vocabulary.
-
-There are two options for this:
-- **Full parameter fine-tuning**: An existing model is further trained, but with a specialized dataset. This adjusts **all parameters** over time, creating a new model. Requires a lot of computing power (expensive).
-- **Low-rank adaptation (LoRA)**: Adds **additional parameters** to a model without affecting the original parameters. Requires less computing power and can be stored or exchanged separately from the model.
-</details>
-
-
-<details markdown="1">
 <summary>Tool Calling</summary>
 
 Tool calling allows an LLM to call predefined **functions** ("tools") in the executing framework's code. With this it can call external APIs (search engines, databases, triggers, etc.). Therefore they are **real-time capable**.
 
 LLMs still only handle text input and output:
 - A **text description** for each tool is added to the LLMs prompt, so it knows how to use them correctly. 
-- It emits a **special token** during generation to call a tool.
-- The tools result is then **added to the prompt** and the LLM can continue with the next tokens.
+- It can emit **JSON** formatted text during generation.
+- The framework intercepts the output and calls the tool.
+- The tools result is then **added to the system prompt** and the LLM can continue with the next tokens.
+
+This works better if the model was fine tuned for tool calling.
 
 Example:
 
@@ -131,4 +123,15 @@ const getRecipesByMainIngedrientTool: RunnableToolFunction<any> = {
 };
 ```
 
+</details>
+
+
+<details markdown="1">
+<summary>Fine Tuning</summary>
+
+Fine-tuning adjusts the **general behavior** of an existing model through **further training**. For example to use it as a chatbot (question/answer), as a code generator, to write books, or to use certain vocabulary.
+
+There are two options for this:
+- **Full parameter fine-tuning**: An existing model is further trained, but with a specialized dataset. This adjusts **all parameters** over time, creating a new model. Requires a lot of computing power (expensive).
+- **Low-rank adaptation (LoRA)**: Adds **additional parameters** to a model without affecting the original parameters. Requires less computing power.
 </details>
